@@ -1,22 +1,141 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistemas de Pedidos</title>
+    <title>Sistema de Pedidos</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
-<div class="crud">
-    <label>name</label><input type="text" id="input-nome">
-    <label>name</label><input type="text" id="input-nome">
-    <label>name</label><input type="text" id="input-nome">
-    <label>name</label><input type="text" id="input-nome">
-    <label>name</label><input type="text" id="input-nome">
-</div>
 
+<body>
+
+<header>
+    <h1>Sistema de Pedidos</h1>
+    
+</header>
+
+<main>
+
+<section class="card">
+    <h2>Pessoas</h2>
+
+    <form id="form-pessoa">
+        <label>Nome</label>
+        <input type="text" id="nome" required>
+
+        <label>CPF</label>
+        <input type="text" id="cpf" required>
+
+        <button type="submit">Cadastrar</button>
+        <button type="button" id="cancelar-pessoa" hidden>Cancelar</button>
+    </form>
+
+    <h3>Pessoas cadastradas</h3>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+        </tr>
+        <tbody id="lista-pessoas"></tbody>
+    </table>
+</section>
+
+<section class="card">
+    <h2>Pedidos</h2>
+
+    <form id="form-pedido">
+        <label>Cliente</label>
+        <select id="cliente" required>
+            <option value="">Selecione</option>
+        </select>
+
+        <label>Produto</label>
+        <input type="text" id="produto" required>
+
+        <label>Valor</label>
+        <input type="number" id="valor" required>
+
+        <label>Status</label>
+        <select id="status">
+            <option>Pendente</option>
+            <option>Concluído</option>
+            <option>Cancelado</option>
+        </select>
+
+        <label>Data</label>
+        <input type="date" id="data" required>
+
+        <button type="submit">Cadastrar</button>
+        <button type="button" id="cancelar-pedido" hidden>Cancelar</button>
+    </form>
+
+    <h3>Pedidos cadastrados</h3>
+
+    <table>
+        <tr>
+            <th>Cliente / Produto</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+        <tbody id="lista-pedidos"></tbody>
+    </table>
+</section>
+
+
+<section class="card dashboard">
+    <h2>Dashboard</h2>
+
+    <div class="indicadores">
+
+        <div class="indicador">
+            <p>Total de clientes</p>
+            <strong id="total-clientes">0</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Total de pedidos</p>
+            <strong id="total-pedidos">0</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Pedidos pendentes</p>
+            <strong id="pedidos-pendentes">0</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Pedidos concluídos</p>
+            <strong id="pedidos-concluidos">0</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Pedidos cancelados</p>
+            <strong id="pedidos-cancelados">0</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Valor vendido</p>
+            <strong id="valor-vendido">R$ 0,00</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Média por pedido</p>
+            <strong id="media-pedido">R$ 0,00</strong>
+        </div>
+
+        <div class="indicador">
+            <p>Pedidos de hoje</p>
+            <strong id="pedidos-hoje">0</strong>
+        </div>
+
+    </div>
+</section>
+
+</main>
 
 <script src="script.js"></script>
+
 </body>
 </html>
