@@ -25,7 +25,6 @@ document.getElementById("form-pessoa").onsubmit = function(e) {
     this.reset();
 };
 
-
 function mostrar() {
     let lista = document.getElementById("lista-pessoas");
 
@@ -48,22 +47,17 @@ function mostrar() {
     mostrarPedidos();
     dashboard();
 }
-
-
 function editarPessoa(i) {
     document.getElementById("nome").value = pessoas[i].nome;
     document.getElementById("cpf").value = pessoas[i].cpf;
 
     pessoaEditando = i;
 }
-
-
 function excluirPessoa(i) {
     pessoas.splice(i, 1);
     salvar();
     mostrar();
 }
-
 
 // ---------- PEDIDOS ----------
 
@@ -90,8 +84,6 @@ document.getElementById("form-pedido").onsubmit = function(e) {
     dashboard();
     this.reset();
 };
-
-
 function mostrarPedidos() {
     let lista = document.getElementById("lista-pedidos");
 
@@ -111,8 +103,6 @@ function mostrarPedidos() {
         `;
     });
 }
-
-
 function editarPedido(i) {
     let p = pedidos[i];
 
@@ -124,15 +114,12 @@ function editarPedido(i) {
 
     pedidoEditando = i;
 }
-
-
 function excluirPedido(i) {
     pedidos.splice(i, 1);
     salvar();
     mostrarPedidos();
     dashboard();
 }
-
 
 // ---------- DASHBOARD ----------
 
@@ -153,7 +140,9 @@ function dashboard() {
     document.getElementById("pedidos-cancelados").textContent =
         pedidos.filter(p => p.status == "Cancelado").length;
 
-    let total = pedidos.reduce((soma, p) => soma + p.valor, 0);
+    let total = pedidos
+    .filter(p => p.status === "Concluído")
+    .reduce((soma, p) => soma + p.valor, 0);
 
     document.getElementById("valor-vendido").textContent =
         "R$ " + total.toFixed(2);
@@ -161,12 +150,11 @@ function dashboard() {
     document.getElementById("media-pedido").textContent =
         pedidos.length ? "R$ " + (total / pedidos.length).toFixed(2) : "R$ 0.00";
 
-    let hoje = new Date().toISOString().split("T")[0];
+        let hoje = new Date().toLocaleDateString("en-CA");
 
     document.getElementById("pedidos-hoje").textContent =
         pedidos.filter(p => p.data == hoje).length;
 }
-
 
 // ---------- OUTRAS FUNÇÕES ----------
 
@@ -180,13 +168,10 @@ function atualizarClientes() {
             `<option>${pessoa.nome}</option>`;
     });
 }
-
-
 function salvar() {
     localStorage.setItem("pessoas", JSON.stringify(pessoas));
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
-
 
 // INICIAR
 mostrar();
